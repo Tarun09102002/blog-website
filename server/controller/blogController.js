@@ -15,6 +15,7 @@ exports.create_blog = async (req, res) => {
 };
 
 exports.get_blogs = async (req, res) => {
+	console.log(req.headers);
 	const blogs = await Blog.find().populate("author", "username");
 
 	res.status(200).json({ blogs });
