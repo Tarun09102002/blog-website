@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "./ViewBlog.scss";
 
 function ViewBlog() {
 	const id = useParams().id;
@@ -48,7 +49,7 @@ function ViewBlog() {
 					<img src={blog.image} alt="" className="w-full" />
 					<div
 						dangerouslySetInnerHTML={{ __html: blog.content }}
-						className="w-full my-3"
+						className="w-full my-3 leading-8 content"
 					/>
 				</div>
 			)}
