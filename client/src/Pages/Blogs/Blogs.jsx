@@ -163,7 +163,7 @@ function Blogs() {
 									>
 										{blog.title}
 									</h1>
-									<div className="flex flex-wrap gap-5 my-2">
+									<div className="flex flex-wrap gap-2 my-2">
 										{blog.themes.map((theme, ind) => {
 											return (
 												<div
@@ -191,7 +191,7 @@ function Blogs() {
 									<img
 										src={blog.image}
 										alt="blog"
-										className="w-40 h-40 object-cover shadow-md shadow-gray-600 rounded-lg"
+										className="lg:w-40 lg:h-40 w-28 h-28 object-cover shadow-md shadow-gray-600 rounded-lg"
 										onClick={() => goToBlog(blog)}
 									/>
 								</div>
