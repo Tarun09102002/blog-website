@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import "./Blogs.scss";
 import Select from "react-select";
 import data from "../../utils/data.json";
+import { Hourglass } from "react-loader-spinner";
 
 function Blogs() {
+	const [isLoading, setIsLoading] = useState(true);
 	const [blogs, setBlogs] = useState([]);
 	const [filteredBlogs, setFilteredBlogs] = useState([]);
 	const [nav, setNav] = useState("all");
@@ -32,6 +34,7 @@ function Blogs() {
 				console.log(res);
 				setBlogs(res.data.blogs);
 				setFilteredBlogs(res.data.blogs);
+				setIsLoading(false);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -73,19 +76,6 @@ function Blogs() {
 			.catch((err) => {
 				console.log(err);
 			});
-	};
-	const filterBlog = () => {
-		const filteredBlogs = blogs.filter((blog) => {
-			let flag = false;
-			filter.forEach((filterItem) => {
-				blog.themes.forEach((theme) => {
-					console.log(theme, filterItem);
-					if (theme.value === filterItem.value) flag = true;
-				});
-			});
-			return flag;
-		});
-		setFilteredBlogs(filteredBlogs);
 	};
 
 	useEffect(() => {
@@ -144,7 +134,17 @@ function Blogs() {
 				/>
 			</div>
 			<div className="flex flex-col w-full gap-8 items-center mb-10">
-				{filteredBlogs.length > 0 ? (
+				{isLoading ? (
+					<Hourglass
+						visible={true}
+						height="80"
+						width="80"
+						ariaLabel="hourglass-loading"
+						wrapperStyle={{}}
+						wrapperClass=""
+						colors={["#306cce", "#72a1ed"]}
+					/>
+				) : filteredBlogs.length > 0 ? (
 					filteredBlogs.map((blog) => {
 						return (
 							<div
