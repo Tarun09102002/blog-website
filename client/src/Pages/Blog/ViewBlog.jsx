@@ -24,7 +24,7 @@ function ViewBlog() {
 	return (
 		<div className="flex flex-col items-center py-16">
 			{blog && (
-				<div className="flex flex-col gap-5 w-1/2">
+				<div className="flex flex-col gap-5 lg:w-1/2 w-[90%]">
 					<h1 className="text-[2rem] font-bold ">{blog.title}</h1>
 					<div className="text-[1.3rem] font-normal text-gray-500 ">
 						{blog.description}
