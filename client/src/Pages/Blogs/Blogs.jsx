@@ -148,10 +148,10 @@ function Blogs() {
 					filteredBlogs.map((blog) => {
 						return (
 							<div
-								className="blog-card border-solid py-4 shadow-md shadow-gray-500 rounded-md flex flex-row items-center justify-between px-5 lg:w-[60%] w-[90%] "
+								className="blog-card border-solid py-4 shadow-md shadow-gray-500 rounded-md flex flex-row gap-3 items-center justify-between px-5 lg:w-[60%] w-[90%] "
 								key={blog._id}
 							>
-								<div className="flex flex-col">
+								<div className="flex flex-col w-3/4">
 									<div className="flex mt-2 text-gray-600 text-sm gap-2">
 										<div className=" ">{blog.author.username} .</div>
 										<div className="">{blog.date.slice(0, 10)}</div>
