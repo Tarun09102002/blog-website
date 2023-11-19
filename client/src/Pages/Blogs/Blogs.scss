@@ -1,6 +1,17 @@
-// .blogs-container {
-// 	background-color: black;
-// 	h1 {
-// 		color: red;
-// 	}
-// }
+.blogs-container {
+	.nav-item {
+		transition: all 0.3s ease-in-out;
+		border: 2px solid #1e40af;
+		padding: 5px 10px;
+		border-radius: 5px;
+		font-size: 1.2rem;
+		cursor: pointer;
+		&:hover {
+			scale: 1.1;
+		}
+	}
+	.nav-item-active {
+		background-color: #1e40af;
+		color: white;
+	}
+}

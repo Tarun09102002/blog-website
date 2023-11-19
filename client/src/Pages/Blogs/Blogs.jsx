@@ -5,10 +5,35 @@ import "./Blogs.scss";
 
 function Blogs() {
 	const [blogs, setBlogs] = useState([]);
+	const [nav, setNav] = useState("all");
+	const navs = [
+		{
+			name: "All Blogs",
+			value: "all",
+		},
+		{
+			name: "My Blogs",
+			value: "my",
+		},
+	];
 	const navigate = useNavigate();
 	const getBlogs = async () => {
 		const res = await axios
 			.get(`${process.env.REACT_APP_SERVER_URL}/blogs`)
+			.then((res) => {
+				console.log(res);
+				setBlogs(res.data.blogs);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+	const getMyBlogs = async () => {
+		const token = sessionStorage.getItem("token");
+		const res = await axios
+			.get(`${process.env.REACT_APP_SERVER_URL}/my-blogs`, {
+				headers: { token },
+			})
 			.then((res) => {
 				console.log(res);
 				setBlogs(res.data.blogs);
@@ -24,9 +49,28 @@ function Blogs() {
 	useEffect(() => {
 		getBlogs();
 	}, []);
+	useEffect(() => {
+		if (nav === "all") getBlogs();
+		else if (nav === "my") getMyBlogs();
+	}, [nav]);
 	return (
 		<div className="blogs-container flex flex-col items-center">
 			<h1 className="text-3xl font-bold my-5">Blogs</h1>
+			<div className="flex flex-row gap-5 mb-5">
+				{navs.map((navItem) => {
+					return (
+						<div
+							className={`nav-item ${
+								nav === navItem.value && "nav-item-active"
+							}`}
+							key={navItem.value}
+							onClick={() => setNav(navItem.value)}
+						>
+							{navItem.name}
+						</div>
+					);
+				})}
+			</div>
 			<div className="flex flex-col w-full gap-8 items-center">
 				{blogs.map((blog) => {
 					return (
@@ -50,7 +94,7 @@ function Blogs() {
 									{blog.themes.map((theme, ind) => {
 										return (
 											<div
-												className="text-xs font-semibold text-white bg-gray-600 px-2 py-1 rounded-md"
+												className="text-xs font-semibold text-white bg-[#1e40af] px-2 py-1 rounded-md"
 												key={ind}
 											>
 												{theme.value}
