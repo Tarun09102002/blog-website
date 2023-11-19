@@ -6,7 +6,7 @@ import Select from "react-select";
 import data from "../../utils/data.json";
 import { Hourglass } from "react-loader-spinner";
 
-function Blogs() {
+function Blogs({ isAuthorized }) {
 	const [isLoading, setIsLoading] = useState(true);
 	const [blogs, setBlogs] = useState([]);
 	const [filteredBlogs, setFilteredBlogs] = useState([]);
@@ -15,6 +15,7 @@ function Blogs() {
 	const options = data.themes.map((theme) => {
 		return { value: theme, label: theme };
 	});
+	console.log(isAuthorized);
 
 	const navs = [
 		{

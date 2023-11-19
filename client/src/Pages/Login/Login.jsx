@@ -3,7 +3,7 @@ import "./Login.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ setIsAuthorized, isAuthorized }) {
 	const navigate = useNavigate();
 	const [credentials, setCredentials] = useState({
 		username: "",
@@ -19,8 +19,10 @@ function Login() {
 			.post(`${process.env.REACT_APP_SERVER_URL}/login`, credentials)
 			.then((res) => {
 				console.log(res);
+				console.log(isAuthorized);
 				sessionStorage.setItem("token", res.data.token);
 				navigate("/");
+				setIsAuthorized(true);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -31,7 +33,7 @@ function Login() {
 	};
 
 	useEffect(() => {
-		if (sessionStorage.getItem("token")) navigate("/");
+		if (isAuthorized) navigate("/");
 	}, []);
 
 	return (

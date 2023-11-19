@@ -10,15 +10,19 @@ import {
 } from "./Pages/index.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 import Navbar from "./Components/Navbar.jsx";
+import { useState } from "react";
 
 function App() {
 	const isAuthenticated = sessionStorage.getItem("token") !== null;
+	const [isAuthorized, setIsAuthorized] = useState(
+		sessionStorage.getItem("token") !== null
+	);
 	function ProtectedPage(props) {
 		const { component: Component } = props;
-		return isAuthenticated ? (
+		return isAuthorized ? (
 			<div>
 				<Navbar />
-				<Component />
+				<Component isAuthorized={isAuthorized} />
 			</div>
 		) : (
 			<Navigate to="/login" replace />
@@ -28,11 +32,18 @@ function App() {
 	return (
 		<div className="App">
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route path="/" element={<Home isAuthorized={isAuthorized} />} />
 				<Route
 					path="/login"
 					element={
-						isAuthenticated ? <Navigate to="/blogs" replace /> : <Login />
+						isAuthenticated ? (
+							<Navigate to="/blogs" replace />
+						) : (
+							<Login
+								setIsAuthorized={setIsAuthorized}
+								isAuthorized={isAuthorized}
+							/>
+						)
 					}
 				/>
 				<Route
