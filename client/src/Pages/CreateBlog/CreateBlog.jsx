@@ -85,7 +85,7 @@ function CreateBlog() {
 	}, [blog]);
 	return (
 		<div className="flex lg:flex-row justify-between flex-col items-center">
-			<div className="flex flex-col items-center w-full mb-10 lg:w-1/2 overflow-hidden">
+			<div className="flex flex-col items-center w-full mb-10 lg:w-1/2 overflow-x-hidden overflow-y-visible ">
 				<h1 className="text-3xl font-bold my-5">Create Blog</h1>
 				<input
 					type="text"
@@ -152,9 +152,9 @@ function CreateBlog() {
 				<CreatableSelect
 					isMulti
 					options={options}
-					className="w-3/4 sm:w-3/4 mt-10"
+					className="w-3/4 sm:w-3/4 mt-10 h-auto"
 					value={blog.themes}
-					placeholder="Select themes"
+					placeholder="Select Tags"
 					onChange={(e) => setBlog({ ...blog, themes: e })}
 				/>
 

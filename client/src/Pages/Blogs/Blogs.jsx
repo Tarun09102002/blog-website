@@ -138,7 +138,7 @@ function Blogs() {
 				<Select
 					options={options}
 					isMulti={true}
-					placeholder="filter"
+					placeholder="filter by tags"
 					className="max-w-[500px] min-w-[300px] border-solid border-2 border-blue-800 rounded-md text-blue-800"
 					onChange={(e) => filterBlogs(e)}
 				/>
