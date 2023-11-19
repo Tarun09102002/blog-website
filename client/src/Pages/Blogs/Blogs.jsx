@@ -168,7 +168,7 @@ function Blogs({ isAuthorized }) {
 										{blog.themes.map((theme, ind) => {
 											return (
 												<div
-													className="text-xs font-semibold text-white bg-[#1e40af] px-2 py-1 rounded-md"
+													className="lg:text-xs text-[0.6rem] font-semibold text-white bg-[#1e40af] px-2 py-1 rounded-md"
 													key={ind}
 												>
 													{theme.value}
@@ -176,7 +176,9 @@ function Blogs({ isAuthorized }) {
 											);
 										})}
 									</div>
-									<p className="text-md mt-3">{blog.description}</p>
+									<p className="text-md mt-3 hidden lg:block">
+										{blog.description}
+									</p>
 									{nav === "my" && (
 										<div className="buttons flex flex-row">
 											<button
