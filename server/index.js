@@ -41,3 +41,4 @@ app.post("/register", userController.register_user);
 app.post("/create-blog", blogController.create_blog);
 app.get("/blogs", blogController.get_blogs);
 app.get("/blog/:id", blogController.get_blog);
+app.delete("/blog/:id", blogController.delete_blog);

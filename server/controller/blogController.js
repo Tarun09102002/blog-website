@@ -15,7 +15,14 @@ exports.create_blog = async (req, res) => {
 };
 
 exports.get_blogs = async (req, res) => {
-	console.log(req.headers);
+	if (req.headers.token) {
+		const id = jwt.verify(req.headers.token, process.env.JWT_SECRET).id;
+		const blogs = await Blog.find({ author: id }).populate(
+			"author",
+			"username"
+		);
+		return res.status(200).json({ blogs });
+	}
 	const blogs = await Blog.find().populate("author", "username");
 
 	res.status(200).json({ blogs });
@@ -25,4 +32,16 @@ exports.get_blog = async (req, res) => {
 	const blog = await Blog.findById(id).populate("author", "username");
 
 	res.status(200).json(blog);
+};
+
+exports.delete_blog = async (req, res) => {
+	const token = req.headers.token;
+	const id = jwt.verify(token, process.env.JWT_SECRET).id;
+	const { id: blogId } = req.params;
+	const blog = await Blog.findById(blogId);
+	if (blog.author.toString() !== id) {
+		return res.status(401).json({ message: "Unauthorized" });
+	}
+	await Blog.findByIdAndDelete(blogId);
+	res.status(200).json({ message: "Blog deleted" });
 };
