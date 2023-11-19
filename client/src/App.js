@@ -9,9 +9,21 @@ import {
 	ViewBlog,
 } from "./Pages/index.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
+import Navbar from "./Components/Navbar.jsx";
 
 function App() {
 	const isAuthenticated = sessionStorage.getItem("token") !== null;
+	function ProtectedPage(props) {
+		const { component: Component } = props;
+		return isAuthenticated ? (
+			<div>
+				<Navbar />
+				<Component />
+			</div>
+		) : (
+			<Navigate to="/login" replace />
+		);
+	}
 
 	return (
 		<div className="App">
@@ -29,23 +41,14 @@ function App() {
 						isAuthenticated ? <Navigate to="/blogs" replace /> : <Register />
 					}
 				/>
-				<Route
-					path="/blogs"
-					element={
-						isAuthenticated ? <Blogs /> : <Navigate to="/login" replace />
-					}
-				/>
+				<Route path="/blogs" element={<ProtectedPage component={Blogs} />} />
 				<Route
 					path="/create-blog"
-					element={
-						isAuthenticated ? <CreateBlog /> : <Navigate to="/login" replace />
-					}
+					element={<ProtectedPage component={CreateBlog} />}
 				/>
 				<Route
 					path="/blog/:id"
-					element={
-						isAuthenticated ? <ViewBlog /> : <Navigate to="/login" replace />
-					}
+					element={<ProtectedPage component={ViewBlog} />}
 				/>
 			</Routes>
 		</div>

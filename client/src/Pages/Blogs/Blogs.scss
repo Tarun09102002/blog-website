@@ -6,6 +6,9 @@
 		border-radius: 5px;
 		font-size: 1.2rem;
 		cursor: pointer;
+		height: 40px;
+		display: flex;
+		align-items: center;
 		&:hover {
 			scale: 1.1;
 		}

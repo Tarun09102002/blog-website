@@ -32,8 +32,8 @@ function Home() {
 		},
 	];
 	return (
-		<div className="home-container flex flex-row w-full items-center min-h-screen">
-			<div className="flex flex-col w-1/2 items-center justify-center">
+		<div className="home-container flex lg:flex-row w-full lg:items-center min-h-screen flex-col justify-center">
+			<div className="flex flex-col w-full lg:w-1/2 items-center justify-center">
 				<h1 className="text-3xl font-bold text-center mb-10">
 					Welcome to <span className="text-blue-500">Blogify</span>
 				</h1>
@@ -47,7 +47,7 @@ function Home() {
 						  ))}
 				</div>
 			</div>
-			<img src="home.jpg" className="w-1/2" alt="" />
+			<img src="home.jpg" className="lg:w-1/2" alt="" />
 		</div>
 	);
 }

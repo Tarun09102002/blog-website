@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Register.scss";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
 	const [credentials, setCredentials] = useState({
@@ -10,6 +11,7 @@ function Register() {
 		password: "",
 		confirmPassword: "",
 	});
+	const navigate = useNavigate();
 	const inputs = [
 		{
 			name: "Name",
@@ -47,17 +49,19 @@ function Register() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		const res = await axios
 			.post(`${process.env.REACT_APP_SERVER_URL}/register`, credentials)
 			.then((res) => {
 				console.log(res);
+				navigate("/login");
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	};
 	return (
-		<div className="RegisterContainer">
+		<div className="RegisterContainer flex flex-col gap-5 mt-5">
 			<h1 className="text-2xl font-bold text-center">Register</h1>
 			<form
 				className="flex flex-col gap-5 w-full items-center"

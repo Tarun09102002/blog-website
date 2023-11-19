@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Login.scss";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+	const navigate = useNavigate();
 	const [credentials, setCredentials] = useState({
 		username: "",
 		password: "",
@@ -12,19 +14,25 @@ function Login() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
 		const res = axios
 			.post(`${process.env.REACT_APP_SERVER_URL}/login`, credentials)
 			.then((res) => {
 				console.log(res);
 				sessionStorage.setItem("token", res.data.token);
+				navigate("/");
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	};
 
+	useEffect(() => {
+		if (sessionStorage.getItem("token")) navigate("/");
+	}, []);
+
 	return (
-		<div className="LoginContainer">
+		<div className="LoginContainer flex flex-col gap-5 mt-5">
 			<h1 className="text-2xl font-bold text-center">Login</h1>
 			<form
 				className="flex flex-col gap-5 w-full items-center"
