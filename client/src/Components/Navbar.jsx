@@ -12,7 +12,7 @@ function Navbar() {
 		<div className="flex flex-row justify-between w-full px-5 py-5">
 			<div>Blogify</div>
 			<div className="flex flex-row gap-5">
-				<Link to="/">
+				<Link to="/" className="hidden lg:block">
 					<div className="nav-item">Home</div>
 				</Link>
 				<Link to="/blogs">
