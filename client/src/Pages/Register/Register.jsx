@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Register.scss";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Register() {
 	const [credentials, setCredentials] = useState({
@@ -84,6 +84,10 @@ function Register() {
 						/>
 					);
 				})}
+				<Link to="/login" className="text-center text-blue-800 my-2">
+					{" "}
+					Already have an account? Login
+				</Link>
 				<button
 					type="submit"
 					className="w-auto px-8 py-4  border-2 border-black rounded-md"

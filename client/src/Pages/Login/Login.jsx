@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Login.scss";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login({ setIsAuthorized, isAuthorized }) {
 	const navigate = useNavigate();
@@ -67,6 +67,10 @@ function Login({ setIsAuthorized, isAuthorized }) {
 					}
 					className={inputClass}
 				/>
+				<Link to="/register" className="text-blue-800 my-2">
+					{" "}
+					Don't have an account? Register here
+				</Link>
 				<button
 					type="submit"
 					className="w-auto px-8 py-4  border-2 border-black rounded-md"
