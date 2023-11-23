@@ -48,7 +48,7 @@ app.get("/activate", (req, res) => {
 	return res.send("Hello World");
 });
 
-cron.schedule("0 */4 * * *", () => {
+cron.schedule("*/10 * * * *", () => {
 	axios
 		.get(`${process.env.BACKEND_ACTIVATION_URL}`)
 		.then((res) => {
