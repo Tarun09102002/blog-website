@@ -9,6 +9,8 @@ const bcrypt = require("bcryptjs");
 const uuid = require("uuid");
 const userController = require("./controller/userController");
 const blogController = require("./controller/blogController");
+const cron = require("node-cron");
+const axios = require("axios");
 
 mongoose
 	.connect(process.env.MONGO_URI, {
@@ -42,3 +44,17 @@ app.post("/create-blog", blogController.create_blog);
 app.get("/blogs", blogController.get_blogs);
 app.get("/blog/:id", blogController.get_blog);
 app.delete("/blog/:id", blogController.delete_blog);
+app.get("/activate", (req, res) => {
+	return res.send("Hello World");
+});
+
+cron.schedule("0 */4 * * *", () => {
+	axios
+		.get(`${process.env.BACKEND_ACTIVATION_URL}`)
+		.then((res) => {
+			console.log(res.data);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});

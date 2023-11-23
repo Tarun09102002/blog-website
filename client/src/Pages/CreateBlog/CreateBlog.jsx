@@ -64,6 +64,7 @@ function CreateBlog() {
 	};
 	const handleImageUpload = (e) => {
 		const file = e.target.files[0];
+		console.log(e.target.files);
 		const reader = new FileReader();
 
 		reader.onloadend = () => {
